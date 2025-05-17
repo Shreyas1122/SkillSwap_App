@@ -41,7 +41,7 @@ app.get("/",simplereplyimports.home)
 
 
 
-const port_number=20000;
+const port_number=process.env.PORT || 20000;
 
 app.listen(port_number,()=>{
   db.connection();
