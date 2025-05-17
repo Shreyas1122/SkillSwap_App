@@ -26,7 +26,7 @@ saveUnintialized:true,
 store:store,
 }));
 app.set('view engine','ejs');
-app.set('views',path.join(__dirname, "./Views"));  //for local run use ./Views
+app.set('views',path.join(__dirname, "Views"));  //for local run use ./Views
 app.use(body_parse.urlencoded());
 
 
