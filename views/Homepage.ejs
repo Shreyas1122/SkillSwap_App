@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Skill Selector Navigation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+    }
+
+    nav {
+      background-color: #333;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .skill-selector {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      background-color: #444;
+      padding: 8px 12px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .skill-selector label {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .skill-selector select {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      background-color: #fff;
+      color: #333;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .skill-selector select:hover {
+      background-color: #f1f1f1;
+    }
+
+    .nav-group {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .nav-links a,
+    .nav-links p {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+
+    .nav-links a:hover,
+    .nav-links p:hover {
+      color: #ffcc00;
+    }
+
+    .login-btn {
+      padding: 8px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: rgba(255, 255, 255, 0.8);
+      transition: background-color 0.3s;
+      font-weight: bold;
+    }
+
+    .login-btn:hover {
+      background-color: rgba(255, 204, 0, 0.9);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      height: 3px;
+      width: 25px;
+      background: white;
+      margin-bottom: 4px;
+      border-radius: 3px;
+    }
+
+    .profile-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .profile-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      width: 100%;
+      height: 700px;
+      background-image: url('../herobanner.png');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: 40px;
+      color: #333;
+    }
+
+    .hero-content {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .hero-btn {
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      background-color: rgba(255, 255, 255, 0.85);
+      color: #333;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .hero-btn:hover {
+      background-color: rgba(255, 204, 0, 0.9);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      padding: 50px 40px;
+      background-color: #fffbe6;
+    }
+
+    .skill-card {
+      background-color: #fff44f;
+      border-radius: 12px;
+      padding: 30px 20px;
+      width: 100%;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-align: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px);
+      background-color: #ffca28;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .carousel-section {
+      padding: 50px 40px;
+      background-color: #fefefe;
+    }
+
+    .carousel-container {
+      display: flex;
+      overflow-x: auto;
+      gap: 20px;
+      scroll-behavior: smooth;
+      padding-bottom: 10px;
+    }
+
+    .carousel-container::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .carousel-container::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 4px;
+    }
+
+    .carousel-title {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    /* Updated User Card */
+    .user-card {
+      min-width: 250px;
+      flex: 0 0 auto;
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      text-align: left;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .user-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .user-card .icon-text {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 12px 0;
+      font-size: 15px;
+      color: #333;
+    }
+
+    .user-card img.profile {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .user-card i {
+      color: #333;
+    }
+
+    /* MOBILE RESPONSIVE CHANGES */
+    @media (max-width: 768px) {
+      /* Hamburger visible */
+      .hamburger {
+        display: flex;
+      }
+
+      /* Hide nav links by default */
+      .nav-links {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        display: none;
+        margin-top: 15px;
+        background-color: #222;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        gap: 15px;
+        z-index: 10;
+      }
+
+      /* Show nav links when active */
+      .nav-links.active {
+        display: flex;
+      }
+
+      /* Nav links text color and size adjustment */
+      .nav-links p,
+      .nav-links a {
+        color: white;
+        font-size: 18px;
+        width: 100%;
+      }
+
+      /* Login button full width */
+      .login-btn {
+        width: 100%;
+        padding: 12px 0;
+        font-size: 18px;
+      }
+
+      /* Profile icon in nav-group adjusted */
+      .nav-group {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+      }
+
+      /* Skill selector stacked and full width */
+      .skill-selector {
+        order: 3;
+        width: 100%;
+        margin: 10px 0;
+        justify-content: center;
+      }
+
+      .skill-selector select {
+        width: 100%;
+      }
+
+      /* Hero section height adjustment for smaller screens */
+      .hero-section {
+        height: auto;
+        padding: 60px 20px;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background-position: center top;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">
+      <img  src="../logo.png" alt="Logo" />
+    </div>
+
+    <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('active')">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-links" id="navLinks">
+        <p style="color: #ccc;">Home</p>
+
+        <% if(cookiesvalue) { %>
+        <button class="login-btn" onclick="window.location.href='/logout'">Logout</button>
+        <% } else { %>
+        <button class="login-btn" onclick="window.location.href='/login'">Login</button>
+        <% } %>
+      </div>
+
+      <!-- <div class="profile-icon">
+        <img style="height: 20px; width: 20px;" src="../profile_logo.png" alt="Profile" />
+      </div> -->
+    </div>
+  </nav>
+
+  <div class="hero-section">
+    <div class="hero-content">
+      <!-- Add hero content here if needed -->
+    </div>
+  </div>
+
+  <div style="padding: 40px; background-color: #fffbe6;">
+    <h2 style="text-align: center; font-size: 28px; margin-bottom: 30px; color: #333;">
+      Skills You Can Learn
+    </h2>
+    <div class="skills-grid">
+      <% if(!cookiesvalue) { %>
+          <p>Please Login To see the content</p>
+          <% } %>
+      <% for (let i = 0; i < Skills.length; i++) { %>
+      <div class="skill-card">
+        <div style="font-size: 20px;"><p><%= Skills[i].teachSkill %></p></div>
+        <p style="font-size: 14px;font-weight: 500; margin-top: 8px;"><%= Skills[i].teachSkillcategory %></p>
+      </div>
+      <% } %>
+    </div>
+  </div>
+
+  <!-- Carousel Section -->
+  <div class="carousel-section">
+    <h2 class="carousel-title">Top Skills Recommended for you</h2>
+    <div class="carousel-container">
+      <% for (let i = 0; i < data.length; i++) { %>
+        
+        <div class="user-card" onclick='location.href="mailto:<%= data[i][3] %>?subject=Hello i want to learn <%= data[i][0] %> ";'>
+          <div class="icon-text">
+            <img class="profile" src="../profile_logo.png" alt="User" />
+            <strong><%= data[i][2] %></strong>
+          </div>
+          <div class="icon-text">
+            <i class="fas fa-envelope"></i>
+            <span><%= data[i][3] %></span>
+          </div>
+          <div class="icon-text">
+            <i class="fas fa-code"></i>
+            <span><%= data[i][0] %></span>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+</body>
+</html>
