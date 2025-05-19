@@ -4,7 +4,7 @@
 [![Flask](https://img.shields.io/badge/Flask-API-lightgrey)](https://flask.palletsprojects.com/)
 [![Node.js](https://img.shields.io/badge/Node.js-Backend-green.svg)](https://nodejs.org/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Database-brightgreen)](https://www.mongodb.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: MIT]()](LICENSE)
 
 ---
 
